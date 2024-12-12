@@ -26,8 +26,7 @@ class ScreenActivityTracker:
         Configure logging for tracking activities
         """
         os.makedirs(self.log_dir, exist_ok=True)
-        log_filename = f'{
-            self.log_dir}/screen_activity_{datetime.now().strftime("%Y%m%d")}.log'
+        log_filename = f'{self.log_dir}/screen_activity_{datetime.now().strftime("%Y%m%d")}.log'
         logging.basicConfig(
             filename=log_filename,
             level=logging.INFO,
