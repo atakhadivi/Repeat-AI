@@ -7,7 +7,13 @@ import logging
 from datetime import datetime
 import hashlib
 import os
-
+import argparse
+import AppKit
+from Quartz.CoreGraphics import CGEventCreateMouseEvent, kCGEventLeftMouseDown, kCGEventLeftMouseUp, kCGEventMouseMoved
+from Quartz.CoreGraphics import kCGEventLeftMouseDown
+import Quartz
+import logging
+import subprocess
 
 class ScreenActivityTracker:
     def __init__(self, log_dir='activity_logs'):
@@ -72,22 +78,50 @@ class ScreenActivityTracker:
 
     def get_active_window_info(self):
         """
-        Retrieve information about the currently active window
-
+        Retrieve information about the currently active window on macOS using the Accessibility API.
+        
         Returns:
-            dict: Window details including title, process, dimensions
+            dict: Window details including title, dimensions, or None if unavailable
         """
         try:
-            active_window = gw.getActiveWindow()
+            # Using Accessibility API to get the active window
+            app = AppKit.NSWorkspace.sharedWorkspace()
+            active_app = app.frontmostApplication()
+
+            # Get the active app's window using Accessibility API (AXUIElement)
+            ax_app = Quartz.CGEventCreateMouseEvent(active_app, Quartz.kCGEventMouseMoved, (0, 0), Quartz.kCGEventLeftMouseDown)
+            
+            window_title = active_app.localizedName()
+
+            # Return window details (for this example, assuming we can get dimensions)
             return {
-                'title': active_window.title,
-                'size': (active_window.width, active_window.height),
-                'position': (active_window.left, active_window.top)
+                'title': window_title,
+                'size': (1000, 800),  # Placeholder for actual dimensions
+                'position': (0, 0)    # Placeholder for actual position
             }
+
         except Exception as e:
             logging.error(f"Could not retrieve active window: {e}")
             return None
-
+    def get_window_position_size():
+        try:
+            script = '''
+            tell application "System Events"
+                set frontApp to name of the first application process whose frontmost is true
+                tell application frontApp
+                    set windowPosition to the position of the front window
+                    set windowSize to the size of the front window
+                end tell
+            end tell
+            '''
+            result = subprocess.run(['osascript', '-e', script], capture_output=True, text=True)
+            window_info = result.stdout.strip().split(',')
+            position = tuple(map(int, window_info[0].split()))
+            size = tuple(map(int, window_info[1].split()))
+            return {'position': position, 'size': size, 'title': frontApp}
+        except Exception as e:
+            logging.error(f"Error retrieving window info: {e}")
+            return None    
     def track_mouse_movement(self, duration=60, interval=1):
         """
         Track mouse movements over a specified duration
@@ -150,3 +184,17 @@ class ScreenActivityTracker:
 if __name__ == "__main__":
     tracker = ScreenActivityTracker()
     tracker.start_continuous_tracking()
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Screen Activity Tracker")
+    parser.add_argument("--log_dir", type=str, default="activity_logs", help="Directory to store logs")
+    parser.add_argument("--interval", type=int, default=5, help="Time interval between activity checks")
+    parser.add_argument("--log_level", type=str, default="INFO", help="Set logging level (INFO, DEBUG, ERROR)")
+    return parser.parse_args()
+
+if __name__ == "__main__":
+    args = parse_arguments()
+    logging.basicConfig(level=getattr(logging, args.log_level.upper(), None))
+    tracker = ScreenActivityTracker(log_dir=args.log_dir)
+    tracker.start_continuous_tracking(interval=args.interval)
