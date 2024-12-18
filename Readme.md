@@ -1,198 +1,125 @@
-Here’s a README.md draft for your AI project:
+# AI Daily Task Assistant - Project Roadmap
 
-AI Daily Task Assistant
+This document outlines the steps required to build an AI-powered daily task assistant that integrates with Todoist, uses screen sharing with Google Gemini (Bard), provides task breakdown, and offers voice guidance.
 
-An intelligent assistant that learns from your daily tasks, guides you step-by-step, and helps automate repetitive workflows.
+## Overview
 
-Overview
+This project aims to create an application that will:
 
-The AI Daily Task Assistant observes and learns from how users interact with their desktop, identifying patterns and breaking down tasks into manageable steps. It provides actionable guidance and suggestions to improve productivity while ensuring a seamless, privacy-conscious experience.
+1. **Connect to Todoist:** Retrieve and manage tasks from a user's Todoist account.
+2. **Share Screen with Gemini:** Enable screen sharing for Gemini (Bard) to visually track tasks and user interactions.
+3. **Task Breakdown:** Utilize AI to analyze tasks and suggest smaller, manageable subtasks.
+4. **Voice Assistance:** Provide real-time voice guidance to the user during task execution.
 
-Key Features
-	•	Task Monitoring: Tracks user actions like file manipulation, web browsing, and software interactions.
-	•	Task Breakdown: Analyzes workflows and breaks tasks into clear, actionable steps.
-	•	Automation Suggestions: Identifies repetitive tasks and proposes efficient automated solutions.
-	•	Step-by-Step Guidance: Offers real-time guidance to complete tasks more effectively.
-	•	Personalized Recommendations: Learns user preferences to suggest optimized workflows.
+## Step-by-Step Tasks
 
-Use Case Examples
-	1.	Email Management:
-	•	Detects frequent actions like organizing emails into folders.
-	•	Suggests an automation workflow to sort emails based on subject, sender, or content.
-	•	Guides the user through creating rules in their email client.
-	2.	Report Generation:
-	•	Observes tasks like exporting data from a database, formatting it in Excel, and emailing it.
-	•	Breaks the process into steps, provides templates, or automates the process entirely.
-	3.	Daily Planning:
-	•	Learns your scheduling habits and suggests time blocks for common tasks.
-	•	Integrates with your calendar to add reminders and deadlines based on observed priorities.
+Here's a breakdown of the development process:
 
-How It Works
-	1.	Observation:
-The assistant monitors desktop activities securely, recording task patterns and context.
-	2.	Analysis:
-Machine learning algorithms identify repetitive workflows and segment tasks into logical steps.
-	3.	Guidance:
-Offers intuitive, plain-language suggestions for streamlining or automating tasks.
-	4.	Automation:
-After user approval, creates scripts or workflows that save time and reduce manual effort.
+**Phase 1: Setup and Core Functionality**
 
-Privacy and Security
-	•	User Control: The assistant tracks only what users allow and provides full transparency.
-	•	Data Privacy: All data is stored locally or encrypted for secure cloud storage.
-	•	Customizable Settings: Users can exclude specific apps or activities from monitoring.
+1. **Project Setup:**
+   *   [x] **Create a new project directory.**  (e.g., `ai-daily-task-assistant`)
+   *   [x] **Choose a programming language and framework.(Django)** 
+   *   [ ] **Install necessary libraries.** (e.g., `todoist-api-python`, any web framework related packages, websockets for real time communication, etc.)
+   *   [ ] **Initialize a Git repository.**
+   *   [ ] **Create a `.gitignore` file.**
 
-Technology Stack
-	•	Programming Language: Python
-	•	Libraries:
-	•	PyAutoGUI - Simulating mouse and keyboard inputs
-	•	Scikit-learn - Machine learning for pattern recognition
-	•	OpenCV - Screen activity tracking
-	•	PyGetWindow - Application window context management
-	•	Keyboard - Keystroke logging and control
-	•	NLTK or OpenAI API - Natural language processing for task guidance
+2.  **Todoist API Integration:**
+    *   [ ] **Create a Todoist developer application** and obtain an API token.
+    *   [ ] **Implement authentication with the Todoist API.**
+    *   [ ] **Implement functionalities to:**
+        *   [ ] **Fetch all active tasks.**
+        *   [ ] **Create new tasks.**
+        *   [ ] **Update task status (completed, in progress).**
+        *   [ ] **Read task descriptions and other details.**
 
-Installation
-	1.	Clone the repository:
+3.  **Basic UI:**
+    *  [ ] **Design a very basic UI**
+    *  [ ] **Display Todoist task list.**
+    *  [ ] **Include basic task controls (start, complete).**
 
-git clone https://github.com/username/ai-daily-task-assistant.git  
+4.  **Screen Sharing Implementation (Proof of Concept):**
+    * [ ] **Research available libraries and methods:**
+       *  WebRTC could be a potential candidate for the screen share functionality.
+       *  Investigate the Gemini API limitations/options.
+    * [ ] **Implement a basic screen-sharing mechanism**
+    * [ ]  **Establish connection between the app and Gemini.** (This may require external services like a socket server).
 
+**Phase 2: AI Integration**
 
-	2.	Navigate to the project directory:
+5.  **Gemini Integration (Basic):**
+    *   [ ] **Obtain API key for Google Gemini (Bard) API.**
+    *   [ ] **Send text prompts to Gemini** for testing purposes.
+    *   [ ] **Receive and display responses from Gemini.**
 
-cd ai-daily-task-assistant  
+6.  **Task Breakdown with Gemini:**
+    *   [ ] **Design a prompt for Gemini to break down tasks.** (e.g., "Break down the task '{task_name}' into smaller subtasks").
+    *   [ ] **Implement logic to send tasks to Gemini.**
+    *   [ ] **Parse and display the generated subtasks.**
+    *   [ ] **Allow user to accept/reject subtasks.**
 
+7.  **Voice Recognition and TTS:**
+    *   [ ] **Choose a voice recognition library/service** (e.g., Web Speech API, Google Cloud Speech-to-Text).
+    *   [ ] **Implement basic voice recognition functionality**
+    *   [ ] **Choose a text-to-speech library/service** (e.g., Web Speech API, Google Text-to-Speech).
+    *   [ ] **Implement basic text-to-speech** functionalities.
 
-	3.	Install dependencies:
+**Phase 3: Enhanced Functionality and Polishing**
 
-pip install -r requirements.txt  
+8. **Real-time screen tracking:**
+    *   [ ] **Implement real time screen sharing.**
+    *   [ ] **Send regular screen captures to Gemini.**
+    *   [ ] **Design prompts to Gemini based on user interactions.**
 
+9.  **Voice Guidance with Gemini:**
+    *   [ ] **Develop prompts to guide the user during task completion.** (e.g., "What's the next step?", "You are now doing ...")
+    *   [ ] **Use Gemini's response to provide voice prompts** to the user.
+    *  [ ] **Manage context** of conversation during voice guidance.
 
-	4.	Run the application:
+10. **Advanced AI Integration**
+    *   [ ] **Personalize task breakdown based on user history.**
+    *   [ ] **Implement smart reminders based on task progress.**
 
-python main.py  
+11. **UI/UX Improvement:**
+    *   [ ] **Enhance the UI with better visual appeal and user experience.**
+    *   [ ] **Improve error handling and user feedback.**
 
+12. **Testing and Debugging:**
+    *   [ ] **Thoroughly test all features and fix bugs.**
+    *   [ ] **Gather user feedback and iterate on the design.**
 
+13. **Deployment:**
+    *  [ ] **Choose a deployment platform** (e.g., Heroku, AWS, Google Cloud)
+    *  [ ] **Deploy the application.**
 
-Here’s a more detailed Development Roadmap with a checklist format for tracking progress:
+## Technologies to Consider
 
-Development Roadmap
+*   **Programming Languages:** Python, JavaScript
+*   **Frameworks:**
+    *   **Backend:** Flask, Django, Express.js
+    *   **Frontend:** React, Vue.js, Angular
+*   **APIs:** Todoist API, Google Gemini API (Bard), Web Speech API, Google Cloud APIs
+*   **Libraries:**
+    *   `todoist-api-python` (Python) or equivalent for your chosen language.
+    *   `websockets`
+    *   WebRTC Library if necessary
+    *   Any UI frameworks libraries
+*  **Deployment:** Heroku, AWS, Google Cloud
 
-Phase 1: Monitoring and Data Collection
+## Important Considerations
 
-Goals:
-	•	Implement functionality to monitor user activities (screen, keyboard, mouse).
-	•	Capture the context of tasks, including application usage and active files.
+*   **API Rate Limiting:** Be aware of API rate limits and implement necessary logic.
+*   **User Privacy:** Handle user data securely and transparently.
+*   **Error Handling:** Implement proper error handling and logging.
+*   **Real-time Communication:** Utilize websockets or similar technologies for real-time screen sharing and voice interaction.
+*   **Scalability:** Design the application with scalability in mind.
+*   **Security:**  Ensure security best practices throughout the development process.
 
-Tasks:
-	•	Screen Activity Tracking:
-	•	Capture active window titles.
-	•	Record screen changes at configurable intervals.
-	•	Implement a mechanism to detect application switches.
-	•	Mouse Movement Tracking:
-	•	Log mouse coordinates and movements.
-	•	Detect clicks (left, right, and double).
-	•	Identify and log drag-and-drop actions.
-	•	Keystroke Logging:
-	•	Record key presses securely.
-	•	Filter sensitive data (e.g., passwords).
-	•	Include application-specific context for key presses.
-	•	Application Context Capture:
-	•	Monitor active application usage (e.g., duration, interactions).
-	•	Log open file names and paths.
-	•	Capture browser activity (URLs, tabs).
+## Next Steps
 
-Phase 2: Pattern Recognition
+1.  **Start by completing the tasks in Phase 1.**
+2.  **Break down each task into smaller, more manageable subtasks.**
+3.  **Use Git to track your progress and version control.**
+4.  **Document your code and APIs thoroughly.**
 
-Goals:
-	•	Use machine learning to identify repetitive workflows.
-	•	Segment complex tasks into smaller, manageable steps.
-
-Tasks:
-	•	Data Preprocessing:
-	•	Clean and structure raw tracking data.
-	•	Label common task patterns for training.
-	•	Handle anomalies or interruptions in workflows.
-	•	Machine Learning Model:
-	•	Choose appropriate algorithms (e.g., clustering, sequential models).
-	•	Train models to identify repetitive patterns.
-	•	Validate accuracy and refine based on user feedback.
-	•	Task Segmentation:
-	•	Define heuristics for segmenting tasks into steps.
-	•	Link related actions across time spans (e.g., drag files and open a specific app).
-	•	Implement testing to ensure accurate segmentation.
-
-Phase 3: Task Guidance and Automation
-
-Goals:
-	•	Create a natural language interface to guide users through task completion.
-	•	Develop approval workflows for automating repetitive tasks.
-
-Tasks:
-	•	Natural Language Interface:
-	•	Integrate NLP for user queries (e.g., “What task can I automate?”).
-	•	Implement plain-language breakdowns for detected workflows.
-	•	Provide step-by-step guidance based on learned patterns.
-	•	Automation Approval Workflow:
-	•	Design an intuitive approval interface for suggested automations.
-	•	Log user decisions to refine future suggestions.
-	•	Build a “preview mode” for showing proposed automations before execution.
-	•	Task Execution Module:
-	•	Implement script generation for repetitive tasks.
-	•	Create an automation engine to execute workflows.
-	•	Add error handling and rollback features.
-
-Phase 4: Advanced Features
-
-Goals:
-	•	Expand functionality to support multiple platforms.
-	•	Enable cloud synchronization and tool integrations.
-
-Tasks:
-	•	Multi-Platform Support:
-	•	Ensure compatibility with Windows.
-	•	Develop macOS support (e.g., using PyObjC for system access).
-	•	Add Linux compatibility with platform-specific implementations.
-	•	Cloud Synchronization:
-	•	Encrypt and securely store task patterns.
-	•	Enable cross-device synchronization of learned workflows.
-	•	Provide offline functionality with auto-sync when online.
-	•	Tool Integrations:
-	•	Connect with Slack for task updates and reminders.
-	•	Integrate with Trello for task board management.
-	•	Sync with Outlook or Google Calendar for scheduling tasks.
-
-Contributing
-
-We welcome contributions to make this project better!
-
-Steps to Contribute:
-	1.	Fork the repository:
-
-git clone https://github.com/username/ai-daily-task-assistant.git  
-
-
-	2.	Create a feature branch:
-
-git checkout -b feature-name  
-
-
-	3.	Make your changes and commit them:
-
-git commit -m "Add feature"  
-
-
-	4.	Push your changes to the branch:
-
-git push origin feature-name  
-
-
-	5.	Create a Pull Request:
-	•	Go to the GitHub repository.
-	•	Open a Pull Request with a detailed description of your changes.
-
-
-License
-
-MIT License
-
+This roadmap should give you a good starting point for building your AI Daily Task Assistant. Good luck!
